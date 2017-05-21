@@ -26,6 +26,15 @@
             android:targetPackage="com.jachness.blockcalls"/>
     </Preference>
 
+    <PreferenceScreen
+        android:persistent="false"
+        android:title="@string/pref_title_tutorial">
+        <CheckBoxPreference
+            android:key="lesson_1"
+            android:summary="@string/pref_lesson_1_summary"
+            android:title="@string/pref_lesson_1"/>
+    </PreferenceScreen>
+
     <Preference android:title="@string/pref_title_privacy_policy">
         <intent
             android:targetClass="com.jachness.blockcalls.activities.PrivacyPolicyActivity"
