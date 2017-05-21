@@ -22,7 +22,6 @@ package com.jachness.blockcalls.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,18 +39,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import com.github.amlcurran.showcaseview.ShowcaseView;
-import com.github.amlcurran.showcaseview.targets.Target;
-import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.jachness.blockcalls.BuildConfig;
 import com.jachness.blockcalls.R;
 import com.jachness.blockcalls.androidService.CallBlockingService;
@@ -59,13 +53,13 @@ import com.jachness.blockcalls.db.LogTable;
 import com.jachness.blockcalls.stuff.AppContext;
 import com.jachness.blockcalls.stuff.AppPreferences;
 import com.jachness.blockcalls.stuff.PermUtil;
-import com.jachness.blockcalls.stuff.ToolbarActionItemTarget;
 import com.jachness.blockcalls.stuff.Util;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import hugo.weaving.DebugLog;
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 /**
  * Welcome / Main Screen
@@ -151,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         fab = (FloatingActionButton) findViewById(R.id.mainFloatingActionButton);
         fab.setOnClickListener(this);
 
+
         AppContext appContext = (AppContext) getApplicationContext();
         appPreferences = appContext.getAppPreferences();
         if (appPreferences.isFirstTime()) {
@@ -165,108 +160,25 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     }
 
 
+    private void showFabPrompt() {
+        appPreferences.setLesson1(true);
+        new MaterialTapTargetPrompt.Builder(MainActivity.this)
+                .setTarget(findViewById(R.id.mainFloatingActionButton))
+                .setBackgroundColourFromRes(R.color.colorPrimary)
+                .setPrimaryText("Block a phone number")
+                .setSecondaryText("Tap the plus button to add a number to the blacklist. You will no longer receive calls from that number.")
+                .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener() {
+                    @Override
+                    public void onHidePrompt(MotionEvent event, boolean tappedTarget) {
 
-    @RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-    private void doCoach() {
-        if (showcase == null) {
-            ArrayList<View> foundViews = new ArrayList<>();
-            counter = 0;
-
-            toolbar.findViewsWithText(foundViews, getResources().getString(R.string.app_name), View
-                    .FIND_VIEWS_WITH_TEXT);
-            if (foundViews.size() != 1) throw new RuntimeException("Should not be here");
-            final Target target1 = new ViewTarget(foundViews.get(0));
-
-            foundViews.clear();
-            tabLayout.findViewsWithText(foundViews, getResources().getString(R.string
-                    .common_black_list), View.FIND_VIEWS_WITH_TEXT);
-            if (foundViews.size() != 1) throw new RuntimeException("Should not be here");
-            final Target target2 = new ViewTarget(foundViews.get(0));
-
-            final Target target3 = new ViewTarget(fab);
-            final Target target4 = new ToolbarActionItemTarget(toolbar, R.id
-                    .mainMnBlockingSettings);
-
-            View.OnClickListener listener = new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    switch (counter) {
-                        case 0:
-                            showcase.setShowcase(target2, true);
-                            showcase.setContentTitle(getResources().getString(R.string
-                                    .coach_lesson1_title2));
-                            showcase.setContentText(getResources().getString(R.string
-                                    .coach_lesson1_detail2));
-                            break;
-
-                        case 1:
-                            showcase.setShowcase(target3, true);
-                            showcase.setContentTitle(getResources().getString(R.string
-                                    .coach_lesson1_title3));
-                            showcase.setContentText(getResources().getString(R.string
-                                    .coach_lesson1_detail3));
-                            break;
-
-                        case 2:
-                            showcase.setTarget(Target.NONE);
-                            showcase.setContentTitle(getResources().getString(R.string
-                                    .coach_lesson1_title4));
-
-
-                            Drawable d;
-                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES
-                                    .LOLLIPOP) {
-                                d = getResources().getDrawable(R.drawable.ic_stat_call_blocked,
-                                        getTheme());
-                            } else {
-                                //noinspection deprecation
-                                d = getResources().getDrawable(R.drawable.ic_stat_call_blocked);
-                            }
-                            d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
-                            ImageSpan span = new ImageSpan(d, ImageSpan.ALIGN_BOTTOM);
-                            String src = getResources().getString(R.string.coach_lesson1_detail4);
-                            SpannableString str = new SpannableString(src);
-                            int index = str.toString().indexOf("@");
-                            str.setSpan(span, index, index + 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-
-                            showcase.setContentText(str);
-                            break;
-                        case 3:
-                            showcase.setShowcase(target4, true);
-                            showcase.setContentTitle(getResources().getString(R.string
-                                    .coach_lesson1_title5));
-                            showcase.setContentText(getResources().getString(R.string
-                                    .coach_lesson1_detail5));
-                            showcase.setButtonText(getString(R.string.common_close));
-                            break;
-                        case 4:
-                            appPreferences.setLesson1(true);
-                            showcase.hide();
-                            showcase = null;
-                            break;
                     }
-                    counter++;
-                }
-            };
 
-            showcase = new ShowcaseView.Builder(this)
-                    .setTarget(target1)
-                    .setContentTitle(getResources().getString(R.string.coach_lesson1_title1))
-                    .setContentText(getResources().getString(R.string.coach_lesson1_detail1))
-                    .withMaterialShowcase()
-                    .setStyle(R.style.ShowcaseTheme)
-                    .setOnClickListener(listener)
-                    .build();
+                    @Override
+                    public void onHidePromptComplete() {
 
-            int margin = (int) getResources().getDimension(R.dimen.activity_vertical_margin);
-            RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(RelativeLayout
-                    .LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-            lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-            lps.addRule(RelativeLayout.CENTER_HORIZONTAL);
-            lps.setMargins(margin, margin, margin, margin);
-
-            showcase.setButtonPosition(lps);
-        }
+                    }
+                })
+                .show();
     }
 
     @Override
@@ -282,9 +194,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             startService(i);
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH && !appPreferences
-                .isLesson1()) {
-            doCoach();
+        if (!appPreferences.isLesson1()) {
+            showFabPrompt();
         }
     }
 
