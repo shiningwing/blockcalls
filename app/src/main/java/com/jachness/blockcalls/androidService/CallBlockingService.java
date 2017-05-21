@@ -124,6 +124,8 @@ public class CallBlockingService extends Service {
                             .setContentTitle(getString(R.string.notification_blocked_title))
                             .setContentText(formattedNumber)
                             .setSmallIcon(R.drawable.ic_stat_call_blocked)
+                            //noinspection deprecation
+                            .setColor(getResources().getColor(R.color.colorPrimary))
                             .setAutoCancel(true)
                             //Content intent is added to satisfy android 2.x requirements
                             .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(), 0))
