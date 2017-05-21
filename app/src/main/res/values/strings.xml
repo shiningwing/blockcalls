@@ -163,16 +163,6 @@ Use the application at your own risk. This application is provided to you “as 
     <string name="pref_lesson_1">Getting started tutorial</string>
     <string name="pref_lesson_1_summary">Block calls by blacklist method</string>
     <string name="pref_title_tutorial">Tutorials</string>
-    <string name="coach_lesson1_title4">Done!</string>
-    <string name="coach_lesson1_title5">More blocking options</string>
-    <string name="coach_lesson1_title2">Blacklist</string>
-    <string name="coach_lesson1_title1">Welcome</string>
-    <string name="coach_lesson1_title3">Add a number to the blacklist</string>
-    <string name="coach_lesson1_detail1">This tutorial will guide you through the basic functionality to block unwanted calls.</string>
-    <string name="coach_lesson1_detail2">The blacklist is simply a list of phone numbers you want to block. When you receive a phone call, which number is registered in the blacklist, the app hangs up the call immediately.</string>
-    <string name="coach_lesson1_detail3">Tap the + button and choose any of the 3 options. When you finish, you will see the new number in the blacklist.</string>
-    <string name="coach_lesson1_detail4">The next time you are called from a blacklisted number, the app will block the call and the @ icon will appear in the notification bar. That way you\'ll know that a call was blocked by the app.</string>
-    <string name="coach_lesson1_detail5">You will find more blocking options in this icon. For example, block all private calls or only allow calls that are registered to your contacts.</string>
     <string name="blacklist_label_empty">Blacklist is empty.\n Tap the + button to add a phone number.</string>
     <string name="log_label_empty">No blocked calls yet</string>
     <string name="call_log_label_empty">There are no incoming calls</string>

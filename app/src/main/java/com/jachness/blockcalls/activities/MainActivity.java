@@ -45,7 +45,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.jachness.blockcalls.BuildConfig;
 import com.jachness.blockcalls.R;
 import com.jachness.blockcalls.androidService.CallBlockingService;
@@ -77,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private int counter = 0;
-    private ShowcaseView showcase;
 
 
     @Override

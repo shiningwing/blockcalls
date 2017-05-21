@@ -124,16 +124,7 @@
     <string name="add_manual_error_invalid">El número de teléfono es inválido</string>
     <string name="common_next">Siguiente</string>
 
-    <string name="coach_lesson1_title1">Bienvenido</string>
-    <string name="coach_lesson1_detail1">Este tutorial te guiará en la funcionalidad básica para bloquear llamadas no deseadas.</string>
-    <string name="coach_lesson1_title2">Lista negra</string>
-    <string name="coach_lesson1_detail2">La lista negra es simplemente una lista de números de teléfono que desea bloquear. Es decir, cuando te llamen desde un número que esté registrado en la lista negra, la app cortará o colgará la llamada inmediatamente.</string>
-    <string name="coach_lesson1_title3">Agregar un número en la lista negra</string>
-    <string name="coach_lesson1_detail3">Toque el botón + y elige cualquiera de las 3 opciones. Cuando finalices, verás el nuevo número en la lista negra.</string>
-    <string name="coach_lesson1_title4">Listo!</string>
-    <string name="coach_lesson1_detail4">La próxima vez que te llamen desde un número registrado en la lista negra, la app bloqueará la llamada y aparecerá el siguiente ícono @ en la barra de notificación. Así sabrás que una llamada fue bloqueada por la app.</string>
-    <string name="coach_lesson1_title5">Más posibilidades de bloqueo</string>
-    <string name="coach_lesson1_detail5">En este ícono encontrarás más opciones de bloqueo. Por ejemplo, bloquear todas las llamadas privadas o solo admitir llamadas que estén registrados en tus contactos.</string>
+
     <string name="pref_title_tutorial">Tutoriales</string>
     <string name="pref_lesson_1">Tutorial introductorio</string>
     <string name="pref_lesson_1_summary">Bloquear llamadas por método de lista negra</string>
